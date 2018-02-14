@@ -39,8 +39,14 @@ public class TicTacToe
     public static void printBoard()
     {
         // initialise instance variables
-
-        System.out.println( "       col col col " );
+        int n = 4;
+        System.out.println( "       " );
+        for( int i1 = 0 ; i1 < n ; i1++ )
+        {
+            System.out.print( "col ");
+            
+        }
+        System.out.println();
         System.out.println( "        1   2   3  " );
         System.out.println( "      -------------" );
 

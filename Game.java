@@ -86,21 +86,40 @@ public class Game
 
             System.out.print("Player X, which row?");
             row = input.nextInt();
+            while ( row < 1 || row > 3 )
+            {
+                System.out.println( "Out of bounds, please try again!");
+                System.out.print("Player X, which row?");
+                row = input.nextInt();
+            }
             System.out.print("Player X, which col?");
             col = input.nextInt();
-            if ( row < 1 || row > 3 || col < 1 || col > 3 )
+            while ( col < 1 || col > 3 )
             {
-                //System.out.println( "Square is out of bound" );   
-                
+                System.out.println( "Out of bounds, please try again!");
+                System.out.print("Player X, which col?");
+                col = input.nextInt();
             }
+
             while( !obj1.changeToX(row,col)   )
             {
                 obj1.printBoard();
                 System.out.print("Player X, which row?");
                 row = input.nextInt();
+                while ( row < 1 || row > 3 )
+                {
+                    System.out.println( "Out of bounds, please try again!");
+                    System.out.print("Player X, which row?");
+                    row = input.nextInt();
+                }
                 System.out.print("Player X, which col?");
-                col = input.nextInt();    
-
+                col = input.nextInt();
+                while ( col < 1 || col > 3 )
+                {
+                    System.out.println( "Out of bounds, please try again!");
+                    System.out.print("Player X, which col?");
+                    col = input.nextInt();
+                }
             }
             obj1.printBoard();
             if( obj1.findWin() == true )
@@ -122,7 +141,7 @@ public class Game
 
             row = (int)( Math.random() *3+1);
             col = (int)( Math.random() *3+1);
-            System.out.println( row + " : " + col ) ; 
+            System.out.println( "Bot played row : " + row + ", col : " + col ) ; 
 
             while( !obj1.changeToO(row,col)   )
             {
@@ -131,7 +150,7 @@ public class Game
                 row = (int)( Math.random() *3+1);
                 //System.out.print("Player Y, which col?");
                 col = (int)( Math.random() *3+1);  
-                System.out.println( row + " : " + col ) ; 
+                System.out.println( "Bot played row : " + row + ", col : " + col ) ; 
                 //try {
                 //System.in.read( ) ; }
                 //catch( Exception ex ) {}
