@@ -8,9 +8,9 @@ import java.util.*;
 public class TicTacToe
 {
     // instance variables - replace the example below with your own
-    private int x;
+    private static int n = 4;
     private String tokenWinner = "";
-    static String[][] board = new String[3][3];
+    static String[][] board = new String[n][n];
     /**
      * Constructor for objects of class TicTacToe
      */
@@ -21,10 +21,10 @@ public class TicTacToe
         System.out.println( "        1   2   3  " );
         System.out.println( "      -------------" );
 
-        for( int i1 = 0 ; i1 <3 ; i1++)
+        for( int i1 = 0 ; i1 < n ; i1++)
         {
             System.out.print( "Row " + (i1 +1 ) + " " );
-            for ( int i2 = 0 ; i2 < 3 ; i2++)
+            for ( int i2 = 0 ; i2 < n ; i2++)
             {
                 board[i1][i2] = ("   ");
                 System.out.print("|");
@@ -39,28 +39,45 @@ public class TicTacToe
     public static void printBoard()
     {
         // initialise instance variables
-        int n = 4;
+
         System.out.println( "       " );
         for( int i1 = 0 ; i1 < n ; i1++ )
         {
             System.out.print( "col ");
-            
+
         }
         System.out.println();
         System.out.println( "        1   2   3  " );
-        System.out.println( "      -------------" );
+        for( int i1 = 0 ; i1 < n ; i1++ )
+        {
+            System.out.print( i1+"   ");
 
-        for( int i1 = 0 ; i1 <3 ; i1++)
+        }
+
+        System.out.println( "      " );
+
+        for( int i1 = 0 ; i1 < n ; i1++ )
+        {
+            System.out.print( "____");
+
+        }
+        System.out.println();
+        for( int i1 = 0 ; i1 <n ; i1++)
         {
             System.out.print( "Row " + (i1 +1 ) + " " );
-            for ( int i2 = 0 ; i2 < 3 ; i2++)
+            for ( int i2 = 0 ; i2 < n ; i2++)
             {
                 System.out.print("|");
                 System.out.print(board[i1][i2]);
             }
             System.out.print("|");
             System.out.println();
-            System.out.println("      -------------");
+            System.out.print("      ");
+            for ( int i2 = 0 ; i2 < n ; i2++)
+            {
+                System.out.print("----");
+            }
+            System.out.println();
         }
     }
 
@@ -95,65 +112,50 @@ public class TicTacToe
 
     public boolean checkToken( String token ) 
     {
-        if( board[0][0] == token)
+        for( int i1 = 0 ; i1 < n ; i1++ )
         {
-            if( board[0][1] ==  token && board[0][2] == token )
+            
+            if( board[0][0] == token)
             {
-                return true ; 
+                for( int i2 = 0 ; i2 < n ; i2++ )
+                {
+                    int win = 0 ;
+                    if( board[i2][i2] ==  token )
+                    {
+                        win ++; 
+                    }
+                    
+                    if ( win == n )
+                        return true;
+                        
+                }
+            }
+            
+            if( board[i1][0] ==  token)
+            {
+                for( int i2 = 0 ; i2 < n ; i2++ )
+                {
+                if( board[i1][i2] ==  token && board[2][1] == token )
+                {
+                    return true ; 
+                }
+
             }
 
-            if( board[1][1] ==  token && board[2][2] == token )
+            if( board[0][i1] ==  token)
             {
-                return true ; 
-            }
+                if( board[1][1] ==  token && board[2][0] == token )
+                {
+                    return true ; 
+                }
 
-            if( board[1][0] ==  token && board[2][0] == token )
-            {
-                return true ; 
-            }
+                if( board[1][2] ==  token && board[2][2] == token )
+                {
+                    return true ; 
+                }
 
+            }
         }
-        if( board[0][1] ==  token)
-        {
-            if( board[1][1] ==  token && board[2][1] == token )
-            {
-                return true ; 
-            }
-
-        }
-
-        if( board[0][2] ==  token)
-        {
-            if( board[1][1] ==  token && board[2][0] == token )
-            {
-                return true ; 
-            }
-
-            if( board[1][2] ==  token && board[2][2] == token )
-            {
-                return true ; 
-            }
-
-        }
-
-        if( board[1][0] ==  token)
-        {
-            if( board[1][1] ==  token && board[1][2] == token )
-            {
-                return true ; 
-            }
-
-        }
-
-        if( board[2][0] ==  token)
-        {
-            if( board[2][1] ==  token && board[2][2] == token )
-            {
-                return true ; 
-            }
-
-        }
-
         return false;
 
     }
@@ -183,15 +185,4 @@ public class TicTacToe
         obj1.printBoard();
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
-    }
 }
