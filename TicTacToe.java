@@ -8,13 +8,13 @@ import java.util.*;
 public class TicTacToe
 {
     // instance variables - replace the example below with your own
-    
+    private int n = GameSet.n();
     private String tokenWinner = "";
-    static String[][] board = new String[n][n];
+     String[][] board = new String[n][n];
     /**
      * Constructor for objects of class TicTacToe
      */
-    public static void setBoard()
+    public  void setBoard()
     {
         // initialise instance variables
         System.out.println( "       col col col " );
@@ -36,7 +36,7 @@ public class TicTacToe
         }
     }
 
-    public static void printBoard()
+    public void printBoard()
     {
         // initialise instance variables
 

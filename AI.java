@@ -20,59 +20,78 @@ public class AI
         int x1 = 0 ; 
         int x2;
 
-        for(int row = 0 ; row < n ; row++)
+        if ( obj1.board[0][0] == tokenwinner )
         {
-            for(int col = 0 ; col < n ; col++)
+            for (int dig = 1 ; dig < n ; dig++)
             {
-                if ( obj1.board[row][col] == tokenWinner )
+                if ( obj1.board[n][n] == tokenWinner )
                 {
-                    x1++;
+                    x1 ++ ;
                 }
 
-                if ( obj1.board[row][col] == "   " )
+                if ( obj1.board[n][n] == tokenLoser)
                 {
-                    x2++;
+                    x1 -- ;
                 }
-
-                if ( x1 == n-1 && x2 == 1 )
+                
+                if ( x1 == n )
                 {
-                    for(int col1 = 0 ; col1 < n ; col1++)
+                    true;
+                }
+                
+                for(int row = 0 ; row < n ; row++)
+                {
+                    for(int col = 0 ; col < n ; col++)
                     {
+                        if ( obj1.board[row][col] == tokenWinner )
+                        {
+                            x1++;
+                        }
+
                         if ( obj1.board[row][col] == "   " )
                         {
-                            obj1.board[row][col] = token;
+                            x2++;
+                        }
+
+                        if ( x1 == n-1 && x2 == 1 )
+                        {
+                            for(int col1 = 0 ; col1 < n ; col1++)
+                            {
+                                if ( obj1.board[row][col] == "   " )
+                                {
+                                    obj1.board[row][col] = token;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                for(int col = 0 ; col < n ; col++)
+                {
+                    for(int row = 0 ; row < n ; row++)
+                    {
+                        if ( board[row][col] == token )
+                        {
+                            x1++;
+                        }
+
+                        if ( x1 == n-1 )
+                        {
+
                         }
                     }
                 }
             }
-        }
 
-        for(int col = 0 ; col < n ; col++)
-        {
-            for(int row = 0 ; row < n ; row++)
+            /**
+             * An example of a method - replace this comment with your own
+             *
+             * @param  y  a sample parameter for a method
+             * @return    the sum of x and y
+             */
+            public int sampleMethod(int y)
             {
-                if ( board[row][col] == token )
-                {
-                    x1++;
-                }
-
-                if ( x1 == n-1 )
-                {
-
-                }
-            }
+            // put your code here
+            return x + y;
         }
     }
-
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
-    }
-}
