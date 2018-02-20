@@ -8,7 +8,7 @@ import java.util.*;
 public class TicTacToe
 {
     // instance variables - replace the example below with your own
-    private static int n = 4;
+    
     private String tokenWinner = "";
     static String[][] board = new String[n][n];
     /**
@@ -46,8 +46,7 @@ public class TicTacToe
             System.out.print( "col ");
 
         }
-        System.out.println();
-        System.out.println( "        1   2   3  " );
+        System.out.println( "       " );
         for( int i1 = 0 ; i1 < n ; i1++ )
         {
             System.out.print( i1+"   ");
@@ -61,7 +60,7 @@ public class TicTacToe
             System.out.print( "____");
 
         }
-        System.out.println();
+        System.out.println( "       " );
         for( int i1 = 0 ; i1 <n ; i1++)
         {
             System.out.print( "Row " + (i1 +1 ) + " " );
@@ -114,7 +113,7 @@ public class TicTacToe
     {
         for( int i1 = 0 ; i1 < n ; i1++ )
         {
-            
+
             if( board[0][0] == token)
             {
                 for( int i2 = 0 ; i2 < n ; i2++ )
@@ -124,43 +123,45 @@ public class TicTacToe
                     {
                         win ++; 
                     }
-                    
+
                     if ( win == n )
                         return true;
-                        
+
                 }
             }
-            
+
             if( board[i1][0] ==  token)
             {
                 for( int i2 = 0 ; i2 < n ; i2++ )
                 {
-                if( board[i1][i2] ==  token && board[2][1] == token )
-                {
-                    return true ; 
+                    if( board[i1][i2] ==  token && board[2][1] == token )
+                    {
+                        return true ; 
+                    }
+
                 }
 
+                if( board[0][i1] ==  token)
+                {
+                    if( board[1][1] ==  token && board[2][0] == token )
+                    {
+                        return true ; 
+                    }
+
+                    if( board[1][2] ==  token && board[2][2] == token )
+                    {
+                        return true ; 
+                    }
+
+                }
             }
+            return false;
 
-            if( board[0][i1] ==  token)
-            {
-                if( board[1][1] ==  token && board[2][0] == token )
-                {
-                    return true ; 
-                }
-
-                if( board[1][2] ==  token && board[2][2] == token )
-                {
-                    return true ; 
-                }
-
-            }
         }
         return false;
-
     }
 
-    public  boolean findWin()
+    public boolean findWin()
     {
         if ( checkToken( " O " ) ) 
         {

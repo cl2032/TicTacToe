@@ -168,7 +168,7 @@ public class Game
 
     public static void main(String args[])
     {
-
+         int n;
         Scanner input = new Scanner(System.in);
         Game gameObj = new Game();
         /*
@@ -180,6 +180,8 @@ public class Game
         while( true ) 
         {
 
+            System.out.println("Board size?" );
+            n = input.nextInt() ; 
             System.out.println(" (1) player vs Player" );
             System.out.println(" (2) player vs Computer" );
             int option1 = input.nextInt() ; 
