@@ -8,18 +8,34 @@ import java.util.*;
 public class TicTacToe
 {
     // instance variables - replace the example below with your own
-    private int n = GameSet.n();
+    public static int n = Game.getN();
     private String tokenWinner = "";
-     String[][] board = new String[n][n];
+    static String[][] board = new String[n][n];
+
+    public void setN()
+    {
+        Scanner input = new Scanner(System.in);
+        n = input.nextInt();
+    }
+
     /**
      * Constructor for objects of class TicTacToe
      */
-    public  void setBoard()
+    public static void setBoard()
     {
         // initialise instance variables
-        System.out.println( "       col col col " );
-        System.out.println( "        1   2   3  " );
-        System.out.println( "      -------------" );
+        System.out.print( "       " );
+        for( int i1 = 0 ; i1 < n ; i1++)
+            System.out.print( "col " );
+        System.out.println();
+        System.out.print( "        " );
+        for( int i1 = 0 ; i1 < n ; i1++)
+            System.out.print( i1 + "   " );
+        System.out.println();
+        System.out.print( "      " );
+        for( int i1 = 0 ; i1 < n ; i1++)
+            System.out.print( "----" );
+        System.out.println();
 
         for( int i1 = 0 ; i1 < n ; i1++)
         {
@@ -32,11 +48,13 @@ public class TicTacToe
             }
             System.out.print("|");
             System.out.println();
-            System.out.println("      -------------");
+            for( int i3 = 0 ; i1 < n ; i1++)
+                System.out.print( "----" );
+            System.out.println();
         }
     }
 
-    public void printBoard()
+    public static void printBoard()
     {
         // initialise instance variables
 
@@ -46,7 +64,8 @@ public class TicTacToe
             System.out.print( "col ");
 
         }
-        System.out.println( "       " );
+        System.out.println();
+        System.out.println( "        1   2   3  " );
         for( int i1 = 0 ; i1 < n ; i1++ )
         {
             System.out.print( i1+"   ");
@@ -60,7 +79,7 @@ public class TicTacToe
             System.out.print( "____");
 
         }
-        System.out.println( "       " );
+        System.out.println();
         for( int i1 = 0 ; i1 <n ; i1++)
         {
             System.out.print( "Row " + (i1 +1 ) + " " );
@@ -161,7 +180,7 @@ public class TicTacToe
         return false;
     }
 
-    public boolean findWin()
+    public  boolean findWin()
     {
         if ( checkToken( " O " ) ) 
         {
@@ -176,14 +195,6 @@ public class TicTacToe
         }
 
         return false ;
-    }
-
-    public static void main(String args[])
-    {
-        TicTacToe obj1 = new TicTacToe();
-        obj1.setBoard();
-        obj1.changeToO(2,2);
-        obj1.printBoard();
     }
 
 }
