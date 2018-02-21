@@ -7,21 +7,16 @@ import java.util.*;
  */
 public class Game
 {
-    public static int n = setN();
+    //public static int n = setN();
     private ArrayList <Integer> myArray;
     private String listType;
-
+    private TicTacToe obj1;
     // instance variables - replace the example below with your own
-    public static int setN()
+    
+    public Game(TicTacToe obj)
     {
-        
-        System.out.println("How big do you want the board to be?" );
-        Scanner input = new Scanner(System.in);
-        return input.nextInt();
-        
+        obj1 = obj;
     }
-
-    private TicTacToe obj1 = new TicTacToe();
 
     public void newGame()
     {
@@ -96,7 +91,7 @@ public class Game
 
             System.out.print("Player X, which row?");
             row = input.nextInt();
-            while ( row < 1 || row > 3 )
+            while ( row < 1 || row > n )
             {
                 System.out.println( "Out of bounds, please try again!");
                 System.out.print("Player X, which row?");
@@ -104,7 +99,7 @@ public class Game
             }
             System.out.print("Player X, which col?");
             col = input.nextInt();
-            while ( col < 1 || col > 3 )
+            while ( col < 1 || col > n )
             {
                 System.out.println( "Out of bounds, please try again!");
                 System.out.print("Player X, which col?");
@@ -116,7 +111,7 @@ public class Game
                 obj1.printBoard();
                 System.out.print("Player X, which row?");
                 row = input.nextInt();
-                while ( row < 1 || row > 3 )
+                while ( row < 1 || row >n )
                 {
                     System.out.println( "Out of bounds, please try again!");
                     System.out.print("Player X, which row?");
@@ -124,7 +119,7 @@ public class Game
                 }
                 System.out.print("Player X, which col?");
                 col = input.nextInt();
-                while ( col < 1 || col > 3 )
+                while ( col < 1 || col > n )
                 {
                     System.out.println( "Out of bounds, please try again!");
                     System.out.print("Player X, which col?");
@@ -176,24 +171,22 @@ public class Game
         }
     }
 
-    public static int getN()
-    {
-        return n;
-    }
 
-    public static void main(String args[])
+    /*public static void main(String args[])
     {
 
         Scanner input = new Scanner(System.in);
         Game gameObj = new Game();
-       // System.out.println("How big do you want the board to be?" );
+        TicTacToe tttObj = new TicTacToe();
+        
+        System.out.println("How big do you want the board to be?" );
 
-        //gameObj.setN();
-        /*
+        tttObj.setN();
+        
         System.out.println(" (1) player vs Player" );
         System.out.println(" (2) player vs Computer" );
         int option1 = input.nextInt() ; 
-        input.nextLine();  */
+        input.nextLine();  
         String str1 ; 
         while( true ) 
         {
@@ -217,6 +210,6 @@ public class Game
             }
 
         }
-    }
+    }*/
 }
 

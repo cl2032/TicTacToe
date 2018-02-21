@@ -8,22 +8,23 @@ import java.util.*;
 public class TicTacToe
 {
     // instance variables - replace the example below with your own
-    public static int n = Game.getN();
+    private int n ;
     private String tokenWinner = "";
-    static String[][] board = new String[n][n];
+    static String[][] board;
 
-    public void setN()
+    public void setN(int n)
     {
-        Scanner input = new Scanner(System.in);
-        n = input.nextInt();
+        this.n = n;
+        board = new String[this.n][this.n];
     }
 
     /**
      * Constructor for objects of class TicTacToe
      */
-    public static void setBoard()
+    public void setBoard()
     {
         // initialise instance variables
+
         System.out.print( "       " );
         for( int i1 = 0 ; i1 < n ; i1++)
             System.out.print( "col " );
@@ -48,39 +49,30 @@ public class TicTacToe
             }
             System.out.print("|");
             System.out.println();
-            for( int i3 = 0 ; i1 < n ; i1++)
+            for( int i3 = 0 ; i3 < n ; i3++)
                 System.out.print( "----" );
             System.out.println();
         }
     }
 
-    public static void printBoard()
+    public void printBoard()
     {
         // initialise instance variables
 
-        System.out.println( "       " );
-        for( int i1 = 0 ; i1 < n ; i1++ )
-        {
-            System.out.print( "col ");
-
-        }
+        System.out.print( "       " );
+        for( int i1 = 0 ; i1 < n ; i1++)
+            System.out.print( "col " );
         System.out.println();
-        System.out.println( "        1   2   3  " );
-        for( int i1 = 0 ; i1 < n ; i1++ )
-        {
-            System.out.print( i1+"   ");
-
-        }
-
-        System.out.println( "      " );
-
-        for( int i1 = 0 ; i1 < n ; i1++ )
-        {
-            System.out.print( "____");
-
-        }
+        System.out.print( "        " );
+        for( int i1 = 0 ; i1 < n ; i1++)
+            System.out.print( i1 + "   " );
         System.out.println();
-        for( int i1 = 0 ; i1 <n ; i1++)
+        System.out.print( "      " );
+        for( int i1 = 0 ; i1 < n ; i1++)
+            System.out.print( "----" );
+        System.out.println();
+
+        for( int i1 = 0 ; i1 < n ; i1++)
         {
             System.out.print( "Row " + (i1 +1 ) + " " );
             for ( int i2 = 0 ; i2 < n ; i2++)
@@ -90,11 +82,8 @@ public class TicTacToe
             }
             System.out.print("|");
             System.out.println();
-            System.out.print("      ");
-            for ( int i2 = 0 ; i2 < n ; i2++)
-            {
-                System.out.print("----");
-            }
+            for( int i3 = 0 ; i3 < n ; i3++)
+                System.out.print( "----" );
             System.out.println();
         }
     }
