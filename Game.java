@@ -11,11 +11,13 @@ public class Game
     private ArrayList <Integer> myArray;
     private String listType;
     private TicTacToe obj1;
+    private int n;
     // instance variables - replace the example below with your own
     
     public Game(TicTacToe obj)
     {
         obj1 = obj;
+        n = obj1.getN();
     }
 
     public void newGame()
@@ -48,7 +50,7 @@ public class Game
             }
             noMoves++ ;
 
-            if( noMoves == 9 ) 
+            if( noMoves == n*n ) 
             {
                 //draw
                 System.out.println("It is a cats game.");
