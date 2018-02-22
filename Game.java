@@ -135,7 +135,7 @@ public class Game
             }
             noMoves++ ;
 
-            if( noMoves == 9 ) 
+            if( noMoves == n*n ) 
             {
                 //draw
                 System.out.println("It is a cats game.");
