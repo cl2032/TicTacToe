@@ -16,7 +16,7 @@ public class GUI extends JFrame implements ActionListener
     mnuStartingPlayer = new JMenuItem(" Starting Player"),
     mnuExit = new JMenuItem("    Quit");
 
-    JButton btnEmpty[] = new JButton[26];
+    JButton btnEmpty[] = new JButton[10];
 
     JPanel  pnlNewGame = new JPanel(),
     pnlNorth = new JPanel(),
@@ -36,7 +36,7 @@ public class GUI extends JFrame implements ActionListener
     private boolean btnEmptyClicked = false;
     private boolean setTableEnabled = false;
     private String message;
-    private Font font = new Font("Rufscript", Font.BOLD, 200);
+    private Font font = new Font("Rufscript", Font.BOLD, 100);
     private int remainingMoves = 1;
 
     //===============================  GUI  ========================================//
@@ -94,9 +94,9 @@ public class GUI extends JFrame implements ActionListener
         mnuStartingPlayer.addActionListener(this);
 
         // setting up the playing field
-        pnlPlayingField.setLayout(new GridLayout(5, 5, 5, 5));
+        pnlPlayingField.setLayout(new GridLayout(3, 3, 2, 2));
         pnlPlayingField.setBackground(Color.black);
-        for(int x=1; x <= 25; ++x)   
+        for(int x=1; x <= 9; ++x)   
         {
             btnEmpty[x] = new JButton();
             btnEmpty[x].setBackground(new Color(220, 220, 220));
@@ -266,6 +266,6 @@ public class GUI extends JFrame implements ActionListener
 
     private void CheckWin() 
     {   
-        
+       
     }
 }	
