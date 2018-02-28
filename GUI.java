@@ -7,6 +7,7 @@ import javax.swing.*;
 
 public class GUI extends JFrame implements ActionListener
 {
+    int dimension = 3 ; 
     // setting up ALL the variables
     JFrame window = new JFrame("Kenneth's Tic Tac Toe Game");
 
@@ -16,7 +17,9 @@ public class GUI extends JFrame implements ActionListener
     mnuStartingPlayer = new JMenuItem(" Starting Player"),
     mnuExit = new JMenuItem("    Quit");
 
-    JButton btnEmpty[] = new JButton[10];
+    //JButton btnEmpty[] = new JButton[10];
+
+    JButton btn2Dim[][] = new JButton[dimension][dimension] ; 
 
     JPanel  pnlNewGame = new JPanel(),
     pnlNorth = new JPanel(),
@@ -94,15 +97,28 @@ public class GUI extends JFrame implements ActionListener
         mnuStartingPlayer.addActionListener(this);
 
         // setting up the playing field
-        pnlPlayingField.setLayout(new GridLayout(3, 3, 2, 2));
+        pnlPlayingField.setLayout(new GridLayout(dimension, dimension, 2, 2));
         pnlPlayingField.setBackground(Color.black);
+        /*
         for(int x=1; x <= 9; ++x)   
         {
-            btnEmpty[x] = new JButton();
-            btnEmpty[x].setBackground(new Color(220, 220, 220));
-            btnEmpty[x].addActionListener(this);
-            pnlPlayingField.add(btnEmpty[x]);
-            btnEmpty[x].setEnabled(setTableEnabled);
+        btnEmpty[x] = new JButton();
+        btnEmpty[x].setBackground(new Color(220, 220, 220));
+        btnEmpty[x].addActionListener(this);
+        pnlPlayingField.add(btnEmpty[x]);
+        btnEmpty[x].setEnabled(setTableEnabled);
+        } */
+
+        for( int row=0 ; row< dimension ; row++ )
+        {
+            for( int col=0 ; col< dimension ; col++ )
+            {
+                btn2Dim[row][col] = new JButton();
+                btn2Dim[row][col].setBackground(new Color(220, 220, 220));
+                btn2Dim[row][col].addActionListener(this);
+                pnlPlayingField.add(btn2Dim[row][col]);
+                btn2Dim[row][col].setEnabled(setTableEnabled);
+            }
         }
 
         // adding everything needed to pnlNorth and pnlSouth
@@ -122,16 +138,35 @@ public class GUI extends JFrame implements ActionListener
         Object source = click.getSource();
 
         // check if a button was clicked on the gameboard
+        /*
         for(int currentMove=1; currentMove <= 9; ++currentMove) 
         {
-            if(source == btnEmpty[currentMove] && remainingMoves < 10)  
+        if(source == btnEmpty[currentMove] && remainingMoves < 10)  
+        {
+        btnEmptyClicked = true;
+        BusinessLogic.GetMove(currentMove, remainingMoves, font, 
+        btnEmpty, startingPlayer);              
+        btnEmpty[currentMove].setEnabled(false);
+        pnlPlayingField.requestFocus();
+        ++remainingMoves;
+        }
+        } */
+
+        for( int row=0 ; row< dimension ; row++ )
+        {
+            for( int col=0 ; col< dimension ; col++ )
             {
-                btnEmptyClicked = true;
-                BusinessLogic.GetMove(currentMove, remainingMoves, font, 
-                    btnEmpty, startingPlayer);              
-                btnEmpty[currentMove].setEnabled(false);
-                pnlPlayingField.requestFocus();
-                ++remainingMoves;
+
+                if(source == btn2Dim[row][col] && remainingMoves < (dimension*dimension + 1) )
+                {
+                    btnEmptyClicked = true;
+                    BusinessLogic.SetMove(row, col, remainingMoves, font, 
+                        btn2Dim, startingPlayer);              
+                    btn2Dim[row][col].setEnabled(false);
+                    pnlPlayingField.requestFocus();
+                    ++remainingMoves;
+                }
+
             }
         }
 
@@ -139,14 +174,14 @@ public class GUI extends JFrame implements ActionListener
         if(btnEmptyClicked) 
         {
             inGame = true;
-            CheckWin();
+            if ( CheckWin() ) 
+                JOptionPane.showMessageDialog(null, "Someone won ");
             btnEmptyClicked = false;
         }
 
-        // check if the user clicks on a menu item
+        // check if the user cliceks on a menu item
         if(source == mnuNewGame)    
         {
-            System.out.println(startingPlayer);
             BusinessLogic.ClearPanelSouth(pnlSouth,pnlTop,pnlNewGame,
                 pnlPlayingField,pnlBottom,radioPanel);
             if(startingPlayer.equals(""))
@@ -255,17 +290,113 @@ public class GUI extends JFrame implements ActionListener
 
         remainingMoves = 1;
 
-        for(int x=1; x <= 9; ++x)   
+        /* for(int x=1; x <= 9; ++x)   
         {
-            btnEmpty[x].setText("");
-            btnEmpty[x].setEnabled(setTableEnabled);
+        btnEmpty[x].setText("");
+        btnEmpty[x].setEnabled(setTableEnabled);
+        }
+         */
+
+        for( int row=0 ; row< dimension ; row++ )
+        {
+            for( int col=0 ; col< dimension ; col++ )
+            {
+                btn2Dim[row][col].setText("");
+                btn2Dim[row][col].setEnabled(setTableEnabled);
+
+            }
         }
 
         win = false;        
     }
 
-    private void CheckWin() 
-    {   
-       
+    String getToken( int row, int col ) 
+    {
+        return ( btn2Dim[row][col].getText() ) ;        
     }
-}	
+
+    private boolean CheckWin() 
+    {   
+        String token ;
+
+        if ( (remainingMoves-1) % 2 != 0 )
+        {   
+            token = "X" ; 
+        }
+        else
+            token = "O" ; 
+
+        for( int row = 0 ; row < dimension ; row++ )    
+        {   
+
+            if( getToken( 0,0 ).equals(token) ) 
+            {   
+                int win1 = 0 ;   
+                for( int dig = 0 ; dig < dimension ; dig++ )    
+                {   
+
+                    if( getToken( dig,dig ).equals(token)     ) 
+                    {   
+                        win1 ++;     
+                    }   
+
+                    if ( win1 == dimension ) 
+                        return true;    
+
+                }   
+            }   
+
+            if( getToken( row,0 ).equals(token))    
+            {   
+                int win1 = 0 ;   
+                for( int col = 0 ; col < dimension ; col++ )   
+                {   
+                    if( getToken( row,col ).equals(token) )  
+                    {   
+                        win1 ++;     
+                    }   
+
+                    if ( win1 == dimension ) 
+                        return true;    
+
+                }   
+            }
+
+            if( getToken( 0,row ).equals(token))    
+            {   
+                int win1 = 0 ;   
+                for( int col = 0 ; col < dimension ; col++ )   
+                {   
+                    if( getToken( col,row ).equals(token) )  
+                    {   
+                        win1 ++;     
+                    }   
+
+                    if ( win1 == dimension ) 
+                        return true;    
+
+                }   
+            }
+
+            if( getToken( dimension-1,0 ).equals(token))
+            {
+                int win1 = 0 ;
+                for( int dig = 0 ; dig < dimension ; dig++ )   
+                {   
+                    if( getToken( dimension-1-dig,dig ).equals(token) )  
+                    {   
+                        win1 ++;     
+                    } 
+
+                    if ( win1 == dimension ) 
+                        return true;    
+
+                }
+            }   
+            return false;   
+
+        }
+        return false; 
+    }   
+}
+
