@@ -175,8 +175,18 @@ public class GUI extends JFrame implements ActionListener
         {
             inGame = true;
             if ( CheckWin() ) 
-                JOptionPane.showMessageDialog(null, "Someone won ");
-            btnEmptyClicked = false;
+            {
+                String token ;
+                if ( (remainingMoves-1) % 2 != 0 )
+                {   
+                    token = "X" ; 
+                }
+                else
+                    token = "O" ; 
+
+                JOptionPane.showMessageDialog(null, token + " won ");
+                btnEmptyClicked = false;
+            }
         }
 
         // check if the user cliceks on a menu item
@@ -225,8 +235,11 @@ public class GUI extends JFrame implements ActionListener
                 System.exit(0);
             }
         }
+
+        //else if(source == mnuDimension)  
+
         // select X or O player 
-        else if(source == mnuStartingPlayer)  
+            else if(source == mnuStartingPlayer)  
         {
             if(inGame)  
             {
