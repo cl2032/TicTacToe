@@ -36,7 +36,7 @@ public class AI
                 
                 if ( x1 == n )
                 {
-                    true;
+                    return true;
                 }
                 
                 for(int row = 0 ; row < n ; row++)
@@ -89,9 +89,6 @@ public class AI
              * @param  y  a sample parameter for a method
              * @return    the sum of x and y
              */
-            public int sampleMethod(int y)
-            {
-            // put your code here
-            return x + y;
         }
     }
+}
