@@ -228,6 +228,7 @@ public class GUI extends JFrame implements ActionListener
                 }
             }       
         }       
+
         // exit button
         else if(source == mnuExit)  
         {
@@ -247,7 +248,7 @@ public class GUI extends JFrame implements ActionListener
             if(inGame)  
             {
                 JOptionPane.showMessageDialog(null, "Cannot select a new Starting "+
-                    "Player at this time.nFinish the current game, or select a New Game "+
+                    "Player at this time.n Finish the current game, or select a New Game "+
                     "to continue", "Game In Session..", JOptionPane.INFORMATION_MESSAGE);
                 BusinessLogic.ShowGame(pnlSouth,pnlPlayingField);
             }
@@ -266,9 +267,24 @@ public class GUI extends JFrame implements ActionListener
                 pnlSouth.setLayout(new GridLayout(2, 1, 2, 1));
                 pnlSouth.add(radioPanel);
                 pnlSouth.add(pnlBottom);
+
+                pnlSouth.setVisible(false); 
+                pnlSouth.setVisible(true);
+                
             }
+            
         }
 
+        else if( source == mnuDim )
+        {
+            
+            
+            
+            
+            
+        }
+        
+        
         else if( source == mnuAI )
         {
             if( inGame )
@@ -283,9 +299,10 @@ public class GUI extends JFrame implements ActionListener
             {
                 RedrawGameBoard();
             }
-            pnlSouth.setVisible(false); 
-            pnlSouth.setVisible(true);  
+           
         }// End Action Performed
+         pnlSouth.setVisible(false); 
+            pnlSouth.setVisible(true);  
     }
     // ===========  Start RadioListener  ===============//  
     private class RadioListener implements ActionListener 
