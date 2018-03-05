@@ -15,6 +15,7 @@ public class GUI extends JFrame implements ActionListener
     JMenuItem   mnuNewGame = new JMenuItem("  New Game"), 
     mnuGameTitle = new JMenuItem("|Tic Tac Toe|  "),
     mnuStartingPlayer = new JMenuItem(" Starting Player"),
+    mnuAI = new JMenuItem( "              AI "),
     mnuExit = new JMenuItem("    Quit");
 
     //JButton btnEmpty[] = new JButton[10];
@@ -79,6 +80,8 @@ public class GUI extends JFrame implements ActionListener
         mnuNewGame.setFont(new Font("Purisa",Font.BOLD,18));
         mnuMain.add(mnuStartingPlayer);
         mnuStartingPlayer.setFont(new Font("Purisa",Font.BOLD,18));
+        mnuMain.add(mnuAI);
+        mnuAI.setFont(new Font("Purisa",Font.BOLD,18));
         mnuMain.add(mnuExit);
         mnuExit.setFont(new Font("Purisa",Font.BOLD,18));//---->Menu Bar Complete
 
@@ -239,7 +242,7 @@ public class GUI extends JFrame implements ActionListener
         //else if(source == mnuDimension)  
 
         // select X or O player 
-            else if(source == mnuStartingPlayer)  
+        else if(source == mnuStartingPlayer)  
         {
             if(inGame)  
             {
@@ -265,10 +268,25 @@ public class GUI extends JFrame implements ActionListener
                 pnlSouth.add(pnlBottom);
             }
         }
-        pnlSouth.setVisible(false); 
-        pnlSouth.setVisible(true);  
-    }// End Action Performed
 
+        else if( source == mnuAI )
+        {
+            if( inGame )
+            {
+                JOptionPane.showMessageDialog(null, "Cannot select a new AI game "+
+                    "Player at this time.nFinish the current game, or select a New Game "+
+                    "to continue", "Game In Session..", JOptionPane.INFORMATION_MESSAGE);
+                BusinessLogic.ShowGame(pnlSouth,pnlPlayingField);
+
+            }
+            else
+            {
+                RedrawGameBoard();
+            }
+            pnlSouth.setVisible(false); 
+            pnlSouth.setVisible(true);  
+        }// End Action Performed
+    }
     // ===========  Start RadioListener  ===============//  
     private class RadioListener implements ActionListener 
     {
