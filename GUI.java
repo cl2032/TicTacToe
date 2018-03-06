@@ -7,6 +7,7 @@ import javax.swing.*;
 
 public class GUI extends JFrame implements ActionListener
 {
+    int AI = 0 ;
     int dimension = 3 ; 
     // setting up ALL the variables
     JFrame window = new JFrame("Kenneth's Tic Tac Toe Game");
@@ -16,6 +17,7 @@ public class GUI extends JFrame implements ActionListener
     mnuGameTitle = new JMenuItem("|Tic Tac Toe|  "),
     mnuStartingPlayer = new JMenuItem(" Starting Player"),
     mnuAI = new JMenuItem( "              AI "),
+    mnuDim = new JMenuItem("   Dimension "),
     mnuExit = new JMenuItem("    Quit");
 
     //JButton btnEmpty[] = new JButton[10];
@@ -29,11 +31,16 @@ public class GUI extends JFrame implements ActionListener
     pnlBottom = new JPanel(),
     pnlPlayingField = new JPanel();
     JPanel radioPanel = new JPanel();
+    JPanel radioPanel1 = new JPanel();
 
     private JRadioButton SelectX = new JRadioButton("User Plays X", false);
     private  JRadioButton SelectO = new JRadioButton("User Plays O", false);
+    private JRadioButton Select3 = new JRadioButton("3", false);
+    private  JRadioButton Select5 = new JRadioButton("5", false);
     private ButtonGroup radioGroup;
+    private ButtonGroup radioGroup1;
     private  String startingPlayer= "";
+    private String dimSize = "";
     final int X = 800, Y = 480, color = 190; // size of the game window
     private boolean inGame = false;
     private boolean win = false;
@@ -71,6 +78,11 @@ public class GUI extends JFrame implements ActionListener
         pnlBottom.setBackground(new Color(color, color, color));
         radioPanel.setBorder(BorderFactory.createTitledBorder(
                 BorderFactory.createEtchedBorder(), "Who Goes First?"));
+                
+                radioPanel1.setBackground(new Color(color, color, color));
+        pnlBottom.setBackground(new Color(color, color, color));
+        radioPanel1.setBorder(BorderFactory.createTitledBorder(
+                BorderFactory.createEtchedBorder(), "Who Goes First?"));
 
         // adding menu items to menu bar
         mnuMain.add(mnuGameTitle);
@@ -82,6 +94,8 @@ public class GUI extends JFrame implements ActionListener
         mnuStartingPlayer.setFont(new Font("Purisa",Font.BOLD,18));
         mnuMain.add(mnuAI);
         mnuAI.setFont(new Font("Purisa",Font.BOLD,18));
+        mnuMain.add(mnuDim);
+        mnuDim.setFont(new Font("Purisa",Font.BOLD,18));
         mnuMain.add(mnuExit);
         mnuExit.setFont(new Font("Purisa",Font.BOLD,18));//---->Menu Bar Complete
 
@@ -94,9 +108,19 @@ public class GUI extends JFrame implements ActionListener
         radioPanel.add(SelectX);
         radioPanel.add(SelectO);
 
+        Select3.setFont(new Font("Purisa",Font.BOLD,18));
+        Select5.setFont(new Font("Purisa",Font.BOLD,18));
+        radioGroup1 = new ButtonGroup();
+        radioGroup1.add(Select3); // add plain to group
+        radioGroup1.add(Select5);
+        radioPanel1.add(Select3);
+        radioPanel1.add(Select5);
+
         // adding Action Listener to all the Buttons and Menu Items
         mnuNewGame.addActionListener(this);
         mnuExit.addActionListener(this);
+        mnuAI.addActionListener(this);
+        mnuDim.addActionListener(this);
         mnuStartingPlayer.addActionListener(this);
 
         // setting up the playing field
@@ -170,6 +194,15 @@ public class GUI extends JFrame implements ActionListener
                     ++remainingMoves;
                 }
 
+                if(remainingMoves < (dimension*dimension + 1) && AI == 1)
+                {
+                    BusinessLogic.SetMove(3, 3, remainingMoves, font, 
+                        btn2Dim, startingPlayer);              
+                    btn2Dim[3][3].setEnabled(false);
+                    pnlPlayingField.requestFocus();
+                    ++remainingMoves;
+                }
+
             }
         }
 
@@ -196,7 +229,7 @@ public class GUI extends JFrame implements ActionListener
         if(source == mnuNewGame)    
         {
             BusinessLogic.ClearPanelSouth(pnlSouth,pnlTop,pnlNewGame,
-                pnlPlayingField,pnlBottom,radioPanel);
+                pnlPlayingField,pnlBottom,radioPanel,radioPanel1);
             if(startingPlayer.equals(""))
             {
                 JOptionPane.showMessageDialog(null, "Please Select a Starting Player", 
@@ -256,12 +289,11 @@ public class GUI extends JFrame implements ActionListener
             {
                 setTableEnabled = true;
                 BusinessLogic.ClearPanelSouth(pnlSouth,pnlTop,pnlNewGame,
-                    pnlPlayingField,pnlBottom,radioPanel);
+                    pnlPlayingField,pnlBottom,radioPanel,radioPanel1);
 
                 SelectX.addActionListener(new RadioListener());
                 SelectO.addActionListener(new RadioListener());
                 radioPanel.setLayout(new GridLayout(2,1));
-
                 radioPanel.add(SelectX);
                 radioPanel.add(SelectO);
                 pnlSouth.setLayout(new GridLayout(2, 1, 2, 1));
@@ -270,40 +302,119 @@ public class GUI extends JFrame implements ActionListener
 
                 pnlSouth.setVisible(false); 
                 pnlSouth.setVisible(true);
-                
+
             }
-            
+
         }
 
         else if( source == mnuDim )
         {
-            
-            
-            
-            
-            
+
+            setTableEnabled = true;
+            BusinessLogic.ClearPanelSouth(pnlSouth,pnlTop,pnlNewGame,
+                pnlPlayingField,pnlBottom,radioPanel,radioPanel1);
+
+            Select3.addActionListener(new RadioListener());
+            Select5.addActionListener(new RadioListener());
+            radioPanel1.setLayout(new GridLayout(2,1));
+            radioPanel1.add(Select3);
+            radioPanel1.add(Select5);
+            pnlSouth.setLayout(new GridLayout(2, 1, 2, 1));
+            pnlSouth.add(radioPanel1);
+            pnlSouth.add(pnlBottom);
+
+            pnlSouth.setVisible(false); 
+            pnlSouth.setVisible(true); 
+
         }
-        
-        
         else if( source == mnuAI )
         {
+            /*
             if( inGame )
             {
-                JOptionPane.showMessageDialog(null, "Cannot select a new AI game "+
-                    "Player at this time.nFinish the current game, or select a New Game "+
-                    "to continue", "Game In Session..", JOptionPane.INFORMATION_MESSAGE);
-                BusinessLogic.ShowGame(pnlSouth,pnlPlayingField);
+            JOptionPane.showMessageDialog(null, "Cannot select a new AI game "+
+            "Player at this time.nFinish the current game, or select a New Game "+
+            "to continue", "Game In Session..", JOptionPane.INFORMATION_MESSAGE);
+            BusinessLogic.ShowGame(pnlSouth,pnlPlayingField);
 
             }
             else
             {
-                RedrawGameBoard();
+
+            //GUIAI game = new GUIAI(); 
+            BusinessLogic.ShowGame(pnlSouth,pnlPlayingField);
+            RedrawGameBoard();
+            //   game.game();
+
+            if(btnEmptyClicked) 
+            {
+            inGame = true;
+            if ( CheckWin() ) 
+            {
+            String token ;
+            if ( (remainingMoves-1) % 2 != 0 )
+            {   
+            token = "X" ; 
             }
-           
-        }// End Action Performed
-         pnlSouth.setVisible(false); 
-            pnlSouth.setVisible(true);  
+            else
+            token = "O" ; 
+
+            JOptionPane.showMessageDialog(null, token + " won ");
+            btnEmptyClicked = false;
+            }
+
+            int row = 3; int col = 2;
+            btnEmptyClicked = true;
+            BusinessLogic.SetMove(row, col, remainingMoves, font, 
+            btn2Dim, startingPlayer);              
+            btn2Dim[row][col].setEnabled(false);
+            pnlPlayingField.requestFocus();
+            ++remainingMoves;
+
+            }
+            }
+             */
+            AI = 1 ;
+            BusinessLogic.ClearPanelSouth(pnlSouth,pnlTop,pnlNewGame,
+                pnlPlayingField,pnlBottom,radioPanel,radioPanel1);
+            if(startingPlayer.equals(""))
+            {
+                JOptionPane.showMessageDialog(null, "Please Select a Starting Player", 
+                    "Oops..", JOptionPane.ERROR_MESSAGE);
+                BusinessLogic.ShowGame(pnlSouth,pnlPlayingField);
+            }
+            else
+            {
+                if(inGame)  
+                {
+                    int option = JOptionPane.showConfirmDialog(null, "If you start a new game," +
+                            " your current game will be lost..." + "n" +"Are you sure you want to continue?"
+                        , "New Game?" ,JOptionPane.YES_NO_OPTION);
+                    if(option == JOptionPane.YES_OPTION)    
+                    {
+                        inGame = false;
+                        startingPlayer = "";
+                        setTableEnabled = false;
+                    }
+                    else
+                    {
+                        BusinessLogic.ShowGame(pnlSouth,pnlPlayingField);
+                    }
+                }
+                // redraw the gameboard to its initial state
+                if(!inGame) 
+                {
+                    RedrawGameBoard();
+                }
+            }       
+
+        }
+
+        // End Action Performed
+        pnlSouth.setVisible(false); 
+        pnlSouth.setVisible(true); 
     }
+
     // ===========  Start RadioListener  ===============//  
     private class RadioListener implements ActionListener 
     {
@@ -319,12 +430,27 @@ public class GUI extends JFrame implements ActionListener
                 startingPlayer = "O";
             }
 
+            JRadioButton dimButton = (JRadioButton)event.getSource();
+            if(dimButton.getText().equals("3")) 
+            {
+                dimension = 3;
+                JButton btn2Dim[][] = new JButton[dimension][dimension] ;
+            }
+            if(dimButton.getText().equals("5"))
+            {
+                System.out.println("hi");
+                dimension = 5;
+                JButton btn2Dim[][] = new JButton[dimension][dimension] ;
+            }
+
             // redisplay the gameboard to the screen
             pnlSouth.setVisible(false); 
             pnlSouth.setVisible(true);          
             RedrawGameBoard();
-        }
-    }// End RadioListener
+
+        }// End RadioListener
+    }
+
     /*
     ----------------------------------
     Start of all the other methods. |
@@ -333,7 +459,7 @@ public class GUI extends JFrame implements ActionListener
     private void RedrawGameBoard()  
     {
         BusinessLogic.ClearPanelSouth(pnlSouth,pnlTop,pnlNewGame,
-            pnlPlayingField,pnlBottom,radioPanel);
+            pnlPlayingField,pnlBottom,radioPanel,radioPanel1);
         BusinessLogic.ShowGame(pnlSouth,pnlPlayingField);       
 
         remainingMoves = 1;
@@ -445,6 +571,6 @@ public class GUI extends JFrame implements ActionListener
 
         }
         return false; 
-    }   
+    }
 }
 

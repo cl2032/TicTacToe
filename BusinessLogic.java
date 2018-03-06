@@ -74,12 +74,14 @@ public class BusinessLogic
     }// End of ShowGame
 
     public static void ClearPanelSouth(JPanel pnlSouth, JPanel pnlTop, 
-    JPanel pnlNewGame, JPanel pnlPlayingField, JPanel pnlBottom, JPanel radioPanel)	
+    JPanel pnlNewGame, JPanel pnlPlayingField, JPanel pnlBottom, JPanel radioPanel, JPanel radioPanel1)	
     {// clears any posible panels on screen
         pnlSouth.remove(pnlTop); 
         pnlSouth.remove(pnlBottom);
         pnlSouth.remove(pnlPlayingField);
         pnlTop.remove(pnlNewGame);
         pnlSouth.remove(radioPanel);
+        
+        pnlSouth.remove(radioPanel1);
     }//	End of ClearPanelSouth 
 }

@@ -1,9 +1,10 @@
 #BlueJ class context
-comment0.params=row\ col\ remainingMoves\ font\ btn2Dim\ startingPlayer
-comment0.target=void\ SetMove(int,\ int,\ int,\ java.awt.Font,\ javax.swing.JButton[][],\ java.lang.String)
-comment0.text=\r\n\ \ \ \ public\ static\ void\ GetMove(int\ currentMove,\ int\ remainingMoves,\ Font\ font,\ JButton\ btnEmpty[],\ \r\n\ \ \ \ String\ startingPlayer)\r\n\ \ \ \ {//\ gets\ the\ current\ move\ "X"\ or\ "O"\ for\ the\ user\ &\ displays\ to\ screen\r\n\ \ \ \ btnEmpty[currentMove].setFont(font);\r\n\r\n\ \ \ \ if(startingPlayer.equals("X"))\r\n\ \ \ \ {\r\n\ \ \ \ if(remainingMoves\ %\ 2\ \!\=\ 0)\r\n\ \ \ \ {\t\t\t\t\r\n\ \ \ \ btnEmpty[currentMove].setText("X");\r\n\ \ \ \ }\r\n\ \ \ \ else\r\n\ \ \ \ {\r\n\ \ \ \ btnEmpty[currentMove].setText("O");\r\n\ \ \ \ }\r\n\ \ \ \ }\r\n\ \ \ \ else\r\n\ \ \ \ {\r\n\ \ \ \ if(remainingMoves\ %\ 2\ \!\=\ 0)\r\n\ \ \ \ {\r\n\ \ \ \ btnEmpty[currentMove].setText("O");\r\n\ \ \ \ }\r\n\ \ \ \ else\r\n\ \ \ \ {\r\n\ \ \ \ btnEmpty[currentMove].setText("X");\r\n\ \ \ \ }\r\n\ \ \ \ }\r\n\ \ \ \ }//\ End\ of\ GetMove\r\n
-comment1.params=pnlSouth\ pnlPlayingField
-comment1.target=void\ ShowGame(javax.swing.JPanel,\ javax.swing.JPanel)
-comment2.params=pnlSouth\ pnlTop\ pnlNewGame\ pnlPlayingField\ pnlBottom\ radioPanel
-comment2.target=void\ ClearPanelSouth(javax.swing.JPanel,\ javax.swing.JPanel,\ javax.swing.JPanel,\ javax.swing.JPanel,\ javax.swing.JPanel,\ javax.swing.JPanel)
-numComments=3
+comment0.target=BusinessLogic
+comment1.params=row\ col\ remainingMoves\ font\ btn2Dim\ startingPlayer
+comment1.target=void\ SetMove(int,\ int,\ int,\ java.awt.Font,\ javax.swing.JButton[][],\ java.lang.String)
+comment1.text=\r\n\ \ \ \ public\ static\ void\ GetMove(int\ currentMove,\ int\ remainingMoves,\ Font\ font,\ JButton\ btnEmpty[],\ \r\n\ \ \ \ String\ startingPlayer)\r\n\ \ \ \ {//\ gets\ the\ current\ move\ "X"\ or\ "O"\ for\ the\ user\ &\ displays\ to\ screen\r\n\ \ \ \ btnEmpty[currentMove].setFont(font);\r\n\r\n\ \ \ \ if(startingPlayer.equals("X"))\r\n\ \ \ \ {\r\n\ \ \ \ if(remainingMoves\ %\ 2\ \!\=\ 0)\r\n\ \ \ \ {\t\t\t\t\r\n\ \ \ \ btnEmpty[currentMove].setText("X");\r\n\ \ \ \ }\r\n\ \ \ \ else\r\n\ \ \ \ {\r\n\ \ \ \ btnEmpty[currentMove].setText("O");\r\n\ \ \ \ }\r\n\ \ \ \ }\r\n\ \ \ \ else\r\n\ \ \ \ {\r\n\ \ \ \ if(remainingMoves\ %\ 2\ \!\=\ 0)\r\n\ \ \ \ {\r\n\ \ \ \ btnEmpty[currentMove].setText("O");\r\n\ \ \ \ }\r\n\ \ \ \ else\r\n\ \ \ \ {\r\n\ \ \ \ btnEmpty[currentMove].setText("X");\r\n\ \ \ \ }\r\n\ \ \ \ }\r\n\ \ \ \ }//\ End\ of\ GetMove\r\n
+comment2.params=pnlSouth\ pnlPlayingField
+comment2.target=void\ ShowGame(javax.swing.JPanel,\ javax.swing.JPanel)
+comment3.params=pnlSouth\ pnlTop\ pnlNewGame\ pnlPlayingField\ pnlBottom\ radioPanel\ radioPanel1
+comment3.target=void\ ClearPanelSouth(javax.swing.JPanel,\ javax.swing.JPanel,\ javax.swing.JPanel,\ javax.swing.JPanel,\ javax.swing.JPanel,\ javax.swing.JPanel,\ javax.swing.JPanel)
+numComments=4
